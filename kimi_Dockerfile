@@ -1,0 +1,12 @@
+FROM openjdk:17-jdk-slim
+
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+WORKDIR /app
+
+COPY kimi.jar /app/kimi.jar
+
+EXPOSE 10013
+
+ENTRYPOINT ["java", "-Xms256m", "-Xmx512m", "-jar", "/app/kimi.jar"]
